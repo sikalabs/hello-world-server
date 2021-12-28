@@ -4,11 +4,17 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/sikalabs/hello-world-server/version"
 )
 
 var Counter = 0
+
+type StatusResponse struct {
+	Counter  int    `json:"counter"`
+	Hostname string `json:"hostname"`
+}
 
 func index(w http.ResponseWriter, r *http.Request) {
 	Counter++
@@ -69,9 +75,11 @@ func readyz(w http.ResponseWriter, r *http.Request) {
 }
 
 func status(w http.ResponseWriter, r *http.Request) {
+	hostname, _ := os.Hostname()
 	w.Header().Set("Content-Type", "application/json")
-	data, _ := json.Marshal(map[string]int{
-		"requests": Counter,
+	data, _ := json.Marshal(StatusResponse{
+		Counter:  Counter,
+		Hostname: hostname,
 	})
 	fmt.Fprint(w, string(data))
 }
