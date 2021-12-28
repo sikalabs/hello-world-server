@@ -8,7 +8,10 @@ import (
 	"github.com/sikalabs/hello-world-server/version"
 )
 
+var Counter = 0
+
 func index(w http.ResponseWriter, r *http.Request) {
+	Counter++
 	w.Header().Set("Content-Type", "text/html")
 	fmt.Fprint(w, `<style>
 html, body {
