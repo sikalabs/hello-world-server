@@ -68,6 +68,14 @@ func readyz(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(data))
 }
 
+func status(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	data, _ := json.Marshal(map[string]int{
+		"requests": Counter,
+	})
+	fmt.Fprint(w, string(data))
+}
+
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/version", versionAPI)
@@ -76,6 +84,8 @@ func main() {
 	http.HandleFunc("/livez", livez)
 	http.HandleFunc("/api/readyz", readyz)
 	http.HandleFunc("/readyz", readyz)
+	http.HandleFunc("/api/status", status)
+	http.HandleFunc("/status", status)
 	fmt.Println("Server started.")
 	http.ListenAndServe(":8000", nil)
 }
