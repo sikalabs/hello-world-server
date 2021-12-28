@@ -1,8 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+
+	"github.com/sikalabs/hello-world-server/version"
 )
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -38,8 +41,18 @@ h1 {
 `)
 }
 
+func versionAPI(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	data, _ := json.Marshal(map[string]string{
+		"version": version.Version,
+	})
+	fmt.Fprint(w, string(data))
+}
+
 func main() {
 	http.HandleFunc("/", index)
+	http.HandleFunc("/api/version", versionAPI)
+	http.HandleFunc("/version", versionAPI)
 	fmt.Println("Server started.")
 	http.ListenAndServe(":8000", nil)
 }
