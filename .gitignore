@@ -9,6 +9,9 @@
 *.log
 *.backup
 
+# Go
+/dist/**
+
 # App
 /hello-world-server
 /hello-world-server.exe
