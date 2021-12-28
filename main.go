@@ -5,15 +5,20 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/sikalabs/hello-world-server/version"
 )
 
 var Counter = 0
+var RunTimestamp time.Time
 
 type StatusResponse struct {
-	Counter  int    `json:"counter"`
-	Hostname string `json:"hostname"`
+	Counter              int    `json:"counter"`
+	Hostname             string `json:"hostname"`
+	RunTimestampUnix     int    `json:"run_timestamp_unix"`
+	RunTimestampRFC3339  string `json:"run_timestamp_rfc3339"`
+	RunTimestampUnixDate string `json:"run_timestamp_unixdate"`
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -78,13 +83,17 @@ func status(w http.ResponseWriter, r *http.Request) {
 	hostname, _ := os.Hostname()
 	w.Header().Set("Content-Type", "application/json")
 	data, _ := json.Marshal(StatusResponse{
-		Counter:  Counter,
-		Hostname: hostname,
+		Counter:              Counter,
+		Hostname:             hostname,
+		RunTimestampUnix:     int(RunTimestamp.Unix()),
+		RunTimestampRFC3339:  RunTimestamp.Format(time.RFC3339),
+		RunTimestampUnixDate: RunTimestamp.Format(time.UnixDate),
 	})
 	fmt.Fprint(w, string(data))
 }
 
 func main() {
+	RunTimestamp = time.Now()
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/version", versionAPI)
 	http.HandleFunc("/version", versionAPI)
