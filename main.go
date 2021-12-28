@@ -49,10 +49,30 @@ func versionAPI(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(data))
 }
 
+func livez(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	data, _ := json.Marshal(map[string]bool{
+		"live": true,
+	})
+	fmt.Fprint(w, string(data))
+}
+
+func readyz(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	data, _ := json.Marshal(map[string]bool{
+		"ready": true,
+	})
+	fmt.Fprint(w, string(data))
+}
+
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/version", versionAPI)
 	http.HandleFunc("/version", versionAPI)
+	http.HandleFunc("/api/livez", livez)
+	http.HandleFunc("/livez", livez)
+	http.HandleFunc("/api/readyz", readyz)
+	http.HandleFunc("/readyz", readyz)
 	fmt.Println("Server started.")
 	http.ListenAndServe(":8000", nil)
 }
