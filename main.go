@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/sikalabs/hello-world-server/version"
@@ -21,38 +22,62 @@ type StatusResponse struct {
 	RunTimestampUnixDate string `json:"run_timestamp_unixdate"`
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
-	Counter++
+func indexPlainText(w http.ResponseWriter) {
+	fmt.Fprint(w, "Hello World\n")
+}
+
+func indexHTML(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "text/html")
 	fmt.Fprint(w, `<style>
-html, body {
-	height: 100%;
+	html, body {
+		height: 100%;
+	}
+	.center-parent {
+		width: 100%;
+		height: 100%;
+		display: table;
+		text-align: center;
+	}
+	.center-parent > .center-child {
+		display: table-cell;
+		vertical-align: middle;
+	}
+	</style>
+	<style>
+	h1 {
+		font-family: Arial;
+		font-size: 5em;
+	}
+	</style>
+	<section class="center-parent">
+		<div class="center-child">
+			<h1>
+				Hello World
+			</h1>
+		</div>
+	</section>
+	`)
 }
-.center-parent {
-	width: 100%;
-	height: 100%;
-	display: table;
-	text-align: center;
-}
-.center-parent > .center-child {
-	display: table-cell;
-	vertical-align: middle;
-}
-</style>
-<style>
-h1 {
-	font-family: Arial;
-	font-size: 5em;
-}
-</style>
-<section class="center-parent">
-	<div class="center-child">
-		<h1>
-			Hello World
-		</h1>
-	</div>
-</section>
-`)
+
+func index(w http.ResponseWriter, r *http.Request) {
+	Counter++
+	// Check if User-Agent header exists
+	if userAgentList, ok := r.Header["User-Agent"]; ok {
+		// Check if User-Agent header has some data
+		if len(userAgentList) > 0 {
+			// If User-Agent starts with curl, use plain text
+			if strings.HasPrefix(userAgentList[0], "curl") {
+				indexPlainText(w)
+			} else {
+				// If User-Agent header presents and not starts with curl
+				// use HTML (Chrome, Safari, Firefox, ...)
+				indexHTML(w)
+			}
+		}
+	} else {
+		// If User-Agent header doesn't exists, use plain text
+		indexPlainText(w)
+	}
 }
 
 func versionAPI(w http.ResponseWriter, r *http.Request) {
