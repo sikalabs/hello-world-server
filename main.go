@@ -24,15 +24,15 @@ type StatusResponse struct {
 	RunTimestampUnixDate string `json:"run_timestamp_unixdate"`
 }
 
-func indexPlainText(w http.ResponseWriter) {
-	fmt.Fprint(w, "Hello World")
+func indexPlainText(w http.ResponseWriter, hostname string) {
+	fmt.Fprintf(w, "Hello World! %s", hostname)
 	if BackgroundColor != "white" {
 		fmt.Fprintf(w, " (%s)", BackgroundColor)
 	}
 	fmt.Fprint(w, "\n")
 }
 
-func indexHTML(w http.ResponseWriter) {
+func indexHTML(w http.ResponseWriter, hostname string) {
 	w.Header().Set("Content-Type", "text/html")
 	fmt.Fprint(w, `<style>
 	html, body {
@@ -59,7 +59,7 @@ func indexHTML(w http.ResponseWriter) {
 	<section class="center-parent">
 		<div class="center-child">
 			<h1>
-				Hello World
+				Hello World! `+hostname+`
 			</h1>
 		</div>
 	</section>
@@ -67,6 +67,7 @@ func indexHTML(w http.ResponseWriter) {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
+	hostname, _ := os.Hostname()
 	Counter++
 	// Check if User-Agent header exists
 	if userAgentList, ok := r.Header["User-Agent"]; ok {
@@ -74,16 +75,16 @@ func index(w http.ResponseWriter, r *http.Request) {
 		if len(userAgentList) > 0 {
 			// If User-Agent starts with curl, use plain text
 			if strings.HasPrefix(userAgentList[0], "curl") {
-				indexPlainText(w)
+				indexPlainText(w, hostname)
 			} else {
 				// If User-Agent header presents and not starts with curl
 				// use HTML (Chrome, Safari, Firefox, ...)
-				indexHTML(w)
+				indexHTML(w, hostname)
 			}
 		}
 	} else {
 		// If User-Agent header doesn't exists, use plain text
-		indexPlainText(w)
+		indexPlainText(w, hostname)
 	}
 }
 
