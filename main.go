@@ -12,10 +12,12 @@ import (
 )
 
 var Counter = 0
+var BackgroundColor = "white"
 var RunTimestamp time.Time
 
 type StatusResponse struct {
 	Counter              int    `json:"counter"`
+	BackgroundColor      string `json:"background_color"`
 	Hostname             string `json:"hostname"`
 	RunTimestampUnix     int    `json:"run_timestamp_unix"`
 	RunTimestampRFC3339  string `json:"run_timestamp_rfc3339"`
@@ -23,7 +25,11 @@ type StatusResponse struct {
 }
 
 func indexPlainText(w http.ResponseWriter) {
-	fmt.Fprint(w, "Hello World\n")
+	fmt.Fprint(w, "Hello World")
+	if BackgroundColor != "white" {
+		fmt.Fprintf(w, " (%s)", BackgroundColor)
+	}
+	fmt.Fprint(w, "\n")
 }
 
 func indexHTML(w http.ResponseWriter) {
@@ -31,6 +37,7 @@ func indexHTML(w http.ResponseWriter) {
 	fmt.Fprint(w, `<style>
 	html, body {
 		height: 100%;
+		background-color: `+BackgroundColor+`
 	}
 	.center-parent {
 		width: 100%;
@@ -110,6 +117,7 @@ func status(w http.ResponseWriter, r *http.Request) {
 	data, _ := json.Marshal(StatusResponse{
 		Counter:              Counter,
 		Hostname:             hostname,
+		BackgroundColor:      BackgroundColor,
 		RunTimestampUnix:     int(RunTimestamp.Unix()),
 		RunTimestampRFC3339:  RunTimestamp.Format(time.RFC3339),
 		RunTimestampUnixDate: RunTimestamp.Format(time.UnixDate),
@@ -118,6 +126,11 @@ func status(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	backgroundCounterEnv := os.Getenv("BACKGROUND_COLOR")
+	if backgroundCounterEnv != "" {
+		BackgroundColor = backgroundCounterEnv
+	}
+
 	RunTimestamp = time.Now()
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/version", versionAPI)
