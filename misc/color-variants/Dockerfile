@@ -1,0 +1,3 @@
+FROM sikalabs/hello-world-server
+ARG BACKGROUND_COLOR=white
+ENV BACKGROUND_COLOR=${BACKGROUND_COLOR}
