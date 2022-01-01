@@ -55,6 +55,7 @@ dockers:
       goarch: amd64
       image_templates:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}"
+        - "sikalabs/{{ .ProjectName }}"
       dockerfile: Dockerfile
       ids:
         - "hello-world-server"
@@ -74,6 +75,7 @@ dockers:
       goarch: arm64
       image_templates:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}-arm64v8"
+        - "sikalabs/{{ .ProjectName }}:arm64v8"
       dockerfile: Dockerfile.arm64v8
       ids:
         - "hello-world-server"
