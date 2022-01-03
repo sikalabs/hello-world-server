@@ -55,12 +55,17 @@ func indexHTML(w http.ResponseWriter, hostname string) {
 		font-family: Arial;
 		font-size: 5em;
 	}
+	h2 {
+		font-family: Arial;
+		font-size: 2em;
+	}
 	</style>
 	<section class="center-parent">
 		<div class="center-child">
 			<h1>
-				Hello World! `+hostname+`
+				Hello World!
 			</h1>
+			<h2>`+hostname+`</h2>
 		</div>
 	</section>
 	`)
