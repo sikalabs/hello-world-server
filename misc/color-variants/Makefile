@@ -10,6 +10,7 @@ build-push-color-variant:
 		--build-arg BACKGROUND_COLOR=${BACKGROUND_COLOR} \
 		--tag sikalabs/hello-world-server:${BACKGROUND_COLOR} \
 		- < Dockerfile
+	docker push sikalabs/hello-world-server:${BACKGROUND_COLOR}
 
 build-push-color-ondrejsika:
 	docker build \
@@ -17,3 +18,4 @@ build-push-color-ondrejsika:
 		--build-arg BACKGROUND_COLOR="#131480" \
 		--tag sikalabs/hello-world-server:ondrejsika \
 		- < Dockerfile
+	docker push sikalabs/hello-world-server:ondrejsika
