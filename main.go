@@ -12,6 +12,7 @@ import (
 )
 
 var Counter = 0
+var Color = "black"
 var BackgroundColor = "white"
 var RunTimestamp time.Time
 
@@ -37,6 +38,7 @@ func indexHTML(w http.ResponseWriter, hostname string) {
 	fmt.Fprint(w, `<style>
 	html, body {
 		height: 100%;
+		color: `+Color+`;
 		background-color: `+BackgroundColor+`
 	}
 	.center-parent {
@@ -135,6 +137,11 @@ func main() {
 	backgroundCounterEnv := os.Getenv("BACKGROUND_COLOR")
 	if backgroundCounterEnv != "" {
 		BackgroundColor = backgroundCounterEnv
+	}
+
+	counterEnv := os.Getenv("COLOR")
+	if counterEnv != "" {
+		Color = counterEnv
 	}
 
 	RunTimestamp = time.Now()
