@@ -15,6 +15,7 @@ var Counter = 0
 var Color = "black"
 var BackgroundColor = "white"
 var RunTimestamp time.Time
+var Text = "Hello World!"
 
 type StatusResponse struct {
 	Counter              int    `json:"counter"`
@@ -26,7 +27,7 @@ type StatusResponse struct {
 }
 
 func indexPlainText(w http.ResponseWriter, hostname string) {
-	fmt.Fprintf(w, "Hello World! %s", hostname)
+	fmt.Fprintf(w, "%s %s", Text, hostname)
 	if BackgroundColor != "white" {
 		fmt.Fprintf(w, " (%s)", BackgroundColor)
 	}
@@ -65,7 +66,7 @@ func indexHTML(w http.ResponseWriter, hostname string) {
 	<section class="center-parent">
 		<div class="center-child">
 			<h1>
-				Hello World!
+				`+Text+`
 			</h1>
 			<h2>`+hostname+`</h2>
 		</div>
@@ -142,6 +143,11 @@ func main() {
 	counterEnv := os.Getenv("COLOR")
 	if counterEnv != "" {
 		Color = counterEnv
+	}
+
+	textEnv := os.Getenv("TEXT")
+	if textEnv != "" {
+		Text = textEnv
 	}
 
 	RunTimestamp = time.Now()
