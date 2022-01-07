@@ -4,6 +4,7 @@ build-push-color-variants:
 	@make build-push-color-variant BACKGROUND_COLOR=blue
 	@make build-push-color-variant BACKGROUND_COLOR=yellow
 	@make build-push-color-variant BACKGROUND_COLOR=red
+	@make build-push-color-cra
 
 build-push-color-variant:
 	docker build \
@@ -19,3 +20,11 @@ build-push-color-ondrejsika:
 		--tag sikalabs/hello-world-server:ondrejsika \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ondrejsika
+
+build-push-color-cra:
+	docker build \
+		--build-arg COLOR="#F99D1C" \
+		--build-arg TEXT="Hello CRA!" \
+		--tag sikalabs/hello-world-server:cra \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:cra
