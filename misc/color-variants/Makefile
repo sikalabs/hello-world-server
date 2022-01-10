@@ -5,6 +5,8 @@ build-push-color-variants:
 	@make build-push-color-variant BACKGROUND_COLOR=yellow
 	@make build-push-color-variant BACKGROUND_COLOR=red
 	@make build-push-color-cra
+	@make build-push-color-lekarna-cz
+	@make build-push-color-o2
 
 build-push-color-variant:
 	docker build \
@@ -28,3 +30,20 @@ build-push-color-cra:
 		--tag sikalabs/hello-world-server:cra \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:cra
+
+build-push-color-lekarna-cz:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="green " \
+		--build-arg TEXT="Hello Lekarna.cz!" \
+		--tag sikalabs/hello-world-server:lekarna-cz \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:lekarna-cz
+
+build-push-color-o2:
+	docker build \
+		--build-arg COLOR="#010066" \
+		--build-arg TEXT="Hello O2!" \
+		--tag sikalabs/hello-world-server:o2 \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:o2
