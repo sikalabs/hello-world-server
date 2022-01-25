@@ -150,6 +150,12 @@ func main() {
 		Text = textEnv
 	}
 
+	port := "8000"
+	envPort := os.Getenv("PORT")
+	if envPort != "" {
+		port = envPort
+	}
+
 	RunTimestamp = time.Now()
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/version", versionAPI)
@@ -161,5 +167,5 @@ func main() {
 	http.HandleFunc("/api/status", status)
 	http.HandleFunc("/status", status)
 	fmt.Println("Server started.")
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServe("0.0.0.0:"+port, nil)
 }
