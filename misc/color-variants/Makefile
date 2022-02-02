@@ -1,5 +1,6 @@
 build-push-color-variants:
 	@make build-push-color-ondrejsika
+	@make build-push-color-devopslive
 	@make build-push-color-variant BACKGROUND_COLOR=green
 	@make build-push-color-variant BACKGROUND_COLOR=blue
 	@make build-push-color-variant BACKGROUND_COLOR=yellow
@@ -22,6 +23,15 @@ build-push-color-ondrejsika:
 		--tag sikalabs/hello-world-server:ondrejsika \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ondrejsika
+
+build-push-color-devopslive:
+	docker build \
+		--build-arg COLOR="#C7BFB0" \
+		--build-arg BACKGROUND_COLOR="#131480" \
+		--build-arg TEXT="Hello DevOps Live!" \
+		--tag sikalabs/hello-world-server:devopslive \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:devopslive
 
 build-push-color-cra:
 	docker build \
