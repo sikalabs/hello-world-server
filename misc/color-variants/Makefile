@@ -8,6 +8,7 @@ build-push-color-variants:
 	@make build-push-color-cra
 	@make build-push-color-lekarna-cz
 	@make build-push-color-o2
+	@make build-push-color-trask
 
 build-push-color-variant:
 	docker build \
@@ -57,3 +58,12 @@ build-push-color-o2:
 		--tag sikalabs/hello-world-server:o2 \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:o2
+
+build-push-color-trask:
+	docker build \
+		--build-arg BACKGROUND_COLOR="#37B0E3" \
+		--build-arg COLOR="#204895" \
+		--build-arg TEXT="Hello TRASK!" \
+		--tag sikalabs/hello-world-server:trask \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:trask
