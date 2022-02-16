@@ -9,6 +9,7 @@ build-push-color-variants:
 	@make build-push-color-lekarna-cz
 	@make build-push-color-o2
 	@make build-push-color-trask
+	@make build-push-color-mstp
 
 build-push-color-variant:
 	docker build \
@@ -67,3 +68,12 @@ build-push-color-trask:
 		--tag sikalabs/hello-world-server:trask \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:trask
+
+build-push-color-mstp:
+	docker build \
+		--build-arg BACKGROUND_COLOR="#ED8906" \
+		--build-arg COLOR="white" \
+		--build-arg TEXT="Hello MSTP!" \
+		--tag sikalabs/hello-world-server:mstp \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:mstp
