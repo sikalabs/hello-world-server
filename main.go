@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/rs/zerolog"
 	"github.com/sikalabs/hello-world-server/version"
 )
 
@@ -16,6 +17,7 @@ var Color = "black"
 var BackgroundColor = "white"
 var RunTimestamp time.Time
 var Text = "Hello World!"
+var Logger zerolog.Logger
 
 type StatusResponse struct {
 	Counter              int    `json:"counter"`
@@ -156,6 +158,7 @@ func main() {
 		port = envPort
 	}
 
+	Logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 	RunTimestamp = time.Now()
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/version", versionAPI)
@@ -166,6 +169,7 @@ func main() {
 	http.HandleFunc("/readyz", readyz)
 	http.HandleFunc("/api/status", status)
 	http.HandleFunc("/status", status)
-	fmt.Println("Server started.")
+	hostname, _ := os.Hostname()
+	Logger.Info().Str("hostname", hostname).Msg("Server started.")
 	http.ListenAndServe("0.0.0.0:"+port, nil)
 }
