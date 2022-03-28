@@ -96,6 +96,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		// If User-Agent header doesn't exists, use plain text
 		indexPlainText(w, hostname)
 	}
+	Logger.Info().Str("hostname", hostname).Str("method", r.Method).Str("path", r.URL.Path).Msg(r.Method + " " + r.URL.Path)
 }
 
 func versionAPI(w http.ResponseWriter, r *http.Request) {
