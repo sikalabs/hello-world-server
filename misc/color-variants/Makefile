@@ -10,6 +10,7 @@ build-push-color-variants:
 	@make build-push-color-o2
 	@make build-push-color-trask
 	@make build-push-color-mstp
+	@make build-push-color-atos
 
 build-push-color-variant:
 	docker build \
