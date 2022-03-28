@@ -77,3 +77,12 @@ build-push-color-mstp:
 		--tag sikalabs/hello-world-server:mstp \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:mstp
+
+build-push-color-atos:
+	docker build \
+		--build-arg BACKGROUND_COLOR="#0696FF" \
+		--build-arg COLOR="white" \
+		--build-arg TEXT="Hello AtoS!" \
+		--tag sikalabs/hello-world-server:atos \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:atos
