@@ -11,6 +11,7 @@ build-push-color-variants:
 	@make build-push-color-trask
 	@make build-push-color-mstp
 	@make build-push-color-atos
+	@make build-push-color-mavenir
 
 build-push-color-variant:
 	docker build \
@@ -87,3 +88,12 @@ build-push-color-atos:
 		--tag sikalabs/hello-world-server:atos \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:atos
+
+build-push-color-mavenir:
+	docker build \
+		--build-arg BACKGROUND_COLOR="white" \
+		--build-arg COLOR="#00558A" \
+		--build-arg TEXT="Hello Mavenir!" \
+		--tag sikalabs/hello-world-server:mavenir \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:mavenir
