@@ -12,6 +12,7 @@ build-push-color-variants:
 	@make build-push-color-mstp
 	@make build-push-color-atos
 	@make build-push-color-mavenir
+	@make build-push-color-ogsoft
 
 build-push-color-variant:
 	docker build \
@@ -97,3 +98,12 @@ build-push-color-mavenir:
 		--tag sikalabs/hello-world-server:mavenir \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:mavenir
+
+build-push-color-ogsoft:
+	docker build \
+		--build-arg BACKGROUND_COLOR="black" \
+		--build-arg COLOR="#F07D00" \
+		--build-arg TEXT="Hello OGSOFT!" \
+		--tag sikalabs/hello-world-server:ogsoft \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:ogsoft
