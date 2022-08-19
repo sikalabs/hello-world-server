@@ -107,3 +107,12 @@ build-push-color-ogsoft:
 		--tag sikalabs/hello-world-server:ogsoft \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ogsoft
+
+build-push-color-fingood:
+	docker build \
+		--build-arg BACKGROUND_COLOR="#F3F4F6" \
+		--build-arg COLOR="#434750" \
+		--build-arg TEXT="Hello Fingood!" \
+		--tag sikalabs/hello-world-server:fingood \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:fingood
