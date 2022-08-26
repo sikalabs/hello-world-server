@@ -13,6 +13,7 @@ build-push-color-variants:
 	@make build-push-color-atos
 	@make build-push-color-mavenir
 	@make build-push-color-ogsoft
+	@make build-push-color-trz
 
 build-push-color-variant:
 	docker build \
@@ -116,3 +117,12 @@ build-push-color-fingood:
 		--tag sikalabs/hello-world-server:fingood \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:fingood
+
+build-push-color-trz:
+	docker build \
+		--build-arg BACKGROUND_COLOR="#9C1012" \
+		--build-arg COLOR="white" \
+		--build-arg TEXT="Hello TRZ!" \
+		--tag sikalabs/hello-world-server:trz \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:trz
