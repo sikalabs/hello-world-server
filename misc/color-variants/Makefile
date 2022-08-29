@@ -14,6 +14,7 @@ build-push-color-variants:
 	@make build-push-color-mavenir
 	@make build-push-color-ogsoft
 	@make build-push-color-trz
+	@make build-push-color-thermofisher
 
 build-push-color-variant:
 	docker build \
@@ -126,3 +127,11 @@ build-push-color-trz:
 		--tag sikalabs/hello-world-server:trz \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:trz
+
+build-push-color-thermofisher:
+	docker build \
+		--build-arg COLOR="#DB1215" \
+		--build-arg TEXT="Hello Thermo Fisher!" \
+		--tag sikalabs/hello-world-server:thermofisher \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:thermofisher
