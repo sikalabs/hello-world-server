@@ -16,6 +16,7 @@ build-push-color-variants:
 	@make build-push-color-trz
 	@make build-push-color-thermofisher
 	@make build-push-color-aardwark
+	@make build-push-color-ttc
 
 build-push-color-variant:
 	docker build \
@@ -144,3 +145,11 @@ build-push-color-aardwark:
 		--tag sikalabs/hello-world-server:aardwark \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:aardwark
+
+build-push-color-ttc:
+	docker build \
+		--build-arg COLOR="#0AB7E6" \
+		--build-arg TEXT="Hello TTC!" \
+		--tag sikalabs/hello-world-server:ttc \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:ttc
