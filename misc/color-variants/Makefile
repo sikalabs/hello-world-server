@@ -15,6 +15,7 @@ build-push-color-variants:
 	@make build-push-color-ogsoft
 	@make build-push-color-trz
 	@make build-push-color-thermofisher
+	@make build-push-color-aardwark
 
 build-push-color-variant:
 	docker build \
@@ -135,3 +136,11 @@ build-push-color-thermofisher:
 		--tag sikalabs/hello-world-server:thermofisher \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:thermofisher
+
+build-push-color-aardwark:
+	docker build \
+		--build-arg COLOR="#734FAA" \
+		--build-arg TEXT="Hello Aardwark!" \
+		--tag sikalabs/hello-world-server:aardwark \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:aardwark
