@@ -18,6 +18,7 @@ build-push-color-variants:
 	@make build-push-color-aardwark
 	@make build-push-color-ttc
 	@make build-push-color-tietoevry
+	@make build-push-color-animato
 
 build-push-color-variant:
 	docker build \
@@ -161,3 +162,11 @@ build-push-color-tietoevry:
 		--tag sikalabs/hello-world-server:tietoevry \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:tietoevry
+
+build-push-color-animato:
+	docker build \
+		--build-arg COLOR="#F80200" \
+		--build-arg TEXT="Hello Animato!" \
+		--tag sikalabs/hello-world-server:animato \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:animato
