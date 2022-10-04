@@ -178,3 +178,11 @@ build-push-color-spcss:
 		--tag sikalabs/hello-world-server:spcss \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:spcss
+
+build-push-color-frequentis:
+	docker build \
+		--build-arg COLOR="#F80200" \
+		--build-arg TEXT="Hello Frequentis!" \
+		--tag sikalabs/hello-world-server:frequentis \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:frequentis
