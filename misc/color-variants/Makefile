@@ -170,3 +170,11 @@ build-push-color-animato:
 		--tag sikalabs/hello-world-server:animato \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:animato
+
+build-push-color-spcss:
+	docker build \
+		--build-arg COLOR="#009ADB" \
+		--build-arg TEXT="Hello SPCSS!" \
+		--tag sikalabs/hello-world-server:spcss \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:spcss
