@@ -20,6 +20,7 @@ build-push-color-variants:
 	@make build-push-color-tietoevry
 	@make build-push-color-animato
 	@make build-push-color-digiteq
+	@make build-push-color-heidelbergmaterials
 
 build-push-color-variant:
 	docker build \
@@ -195,3 +196,11 @@ build-push-color-digiteq:
 		--tag sikalabs/hello-world-server:digiteq \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:digiteq
+
+build-push-color-heidelbergmaterials:
+	docker build \
+		--build-arg COLOR="#004E2B" \
+		--build-arg TEXT="Hello Heidelberg Materials!" \
+		--tag sikalabs/hello-world-server:heidelbergmaterials \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:heidelbergmaterials
