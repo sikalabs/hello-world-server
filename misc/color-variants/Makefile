@@ -19,6 +19,7 @@ build-push-color-variants:
 	@make build-push-color-ttc
 	@make build-push-color-tietoevry
 	@make build-push-color-animato
+	@make build-push-color-digiteq
 
 build-push-color-variant:
 	docker build \
@@ -186,3 +187,11 @@ build-push-color-frequentis:
 		--tag sikalabs/hello-world-server:frequentis \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:frequentis
+
+build-push-color-digiteq:
+	docker build \
+		--build-arg COLOR="#185DB2" \
+		--build-arg TEXT="Hello Digiteq!" \
+		--tag sikalabs/hello-world-server:digiteq \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:digiteq
