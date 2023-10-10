@@ -21,6 +21,7 @@ build-push-color-variants:
 	@make build-push-color-animato
 	@make build-push-color-digiteq
 	@make build-push-color-heidelbergmaterials
+	@make build-push-color-eon
 
 build-push-color-variant:
 	docker build \
@@ -204,3 +205,11 @@ build-push-color-heidelbergmaterials:
 		--tag sikalabs/hello-world-server:heidelbergmaterials \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:heidelbergmaterials
+
+build-push-color-eon:
+	docker build \
+		--build-arg COLOR="#EA1B0A" \
+		--build-arg TEXT="Hello EON!" \
+		--tag sikalabs/hello-world-server:eon \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:eon
