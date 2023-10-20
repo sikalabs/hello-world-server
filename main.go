@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -11,6 +12,9 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/sikalabs/hello-world-server/version"
 )
+
+//go:embed favicon.ico
+var favicon []byte
 
 var Counter = 0
 var Color = "black"
@@ -65,6 +69,7 @@ func indexHTML(w http.ResponseWriter, hostname string) {
 		font-size: 2em;
 	}
 	</style>
+	<link rel="icon" href="/favicon.ico">
 	<section class="center-parent">
 		<div class="center-child">
 			<h1>
@@ -137,6 +142,12 @@ func status(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(data))
 }
 
+func faviconHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "image/x-icon")
+	w.WriteHeader(http.StatusOK)
+	w.Write(favicon)
+}
+
 func main() {
 	backgroundCounterEnv := os.Getenv("BACKGROUND_COLOR")
 	if backgroundCounterEnv != "" {
@@ -170,6 +181,8 @@ func main() {
 	http.HandleFunc("/readyz", readyz)
 	http.HandleFunc("/api/status", status)
 	http.HandleFunc("/status", status)
+	http.HandleFunc("/favicon.ico", faviconHandler)
+
 	hostname, _ := os.Hostname()
 	Logger.Info().Str("hostname", hostname).Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port)
 	http.ListenAndServe("0.0.0.0:"+port, nil)
