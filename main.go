@@ -171,6 +171,6 @@ func main() {
 	http.HandleFunc("/api/status", status)
 	http.HandleFunc("/status", status)
 	hostname, _ := os.Hostname()
-	Logger.Info().Str("hostname", hostname).Msg("Server started.")
+	Logger.Info().Str("hostname", hostname).Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port)
 	http.ListenAndServe("0.0.0.0:"+port, nil)
 }
