@@ -22,6 +22,7 @@ build-push-color-variants:
 	@make build-push-color-digiteq
 	@make build-push-color-heidelbergmaterials
 	@make build-push-color-eon
+	@make build-push-color-ceps
 
 build-push-color-variant:
 	docker build \
@@ -213,3 +214,12 @@ build-push-color-eon:
 		--tag sikalabs/hello-world-server:eon \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:eon
+
+build-push-color-ceps:
+	docker build \
+		--build-arg BACKGROUND_COLOR="#C1251F" \
+		--build-arg COLOR="white" \
+		--build-arg TEXT="Hello CEPS!" \
+		--tag sikalabs/hello-world-server:ceps \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:ceps
