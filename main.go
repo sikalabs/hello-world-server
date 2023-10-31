@@ -185,5 +185,8 @@ func main() {
 
 	hostname, _ := os.Hostname()
 	Logger.Info().Str("hostname", hostname).Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port)
-	http.ListenAndServe("0.0.0.0:"+port, nil)
+	err := http.ListenAndServe("0.0.0.0:"+port, nil)
+	if err != nil {
+		Logger.Fatal().Str("hostname", hostname).Msg(err.Error())
+	}
 }
