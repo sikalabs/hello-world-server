@@ -23,6 +23,7 @@ build-push-color-variants:
 	@make build-push-color-heidelbergmaterials
 	@make build-push-color-eon
 	@make build-push-color-ceps
+	@make build-push-color-generali
 
 build-push-color-variant:
 	docker build \
@@ -223,3 +224,11 @@ build-push-color-ceps:
 		--tag sikalabs/hello-world-server:ceps \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ceps
+
+build-push-color-generali:
+	docker build \
+		--build-arg COLOR="#C21B18" \
+		--build-arg TEXT="Hello Generali!" \
+		--tag sikalabs/hello-world-server:generali \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:generali
