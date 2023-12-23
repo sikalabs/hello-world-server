@@ -55,6 +55,7 @@ dockers:
       goarch: amd64
       image_templates:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}"
+        - "sikalabs/{{ .ProjectName }}:stable"
         - "sikalabs/{{ .ProjectName }}"
       dockerfile: Dockerfile.goreleaser
       ids:
@@ -75,6 +76,7 @@ dockers:
       goarch: arm64
       image_templates:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}-arm64v8"
+        - "sikalabs/{{ .ProjectName }}:stable-arm64v8"
         - "sikalabs/{{ .ProjectName }}:arm64v8"
       dockerfile: Dockerfile.goreleaser.arm64v8
       ids:
