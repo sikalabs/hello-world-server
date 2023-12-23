@@ -56,7 +56,7 @@ dockers:
       image_templates:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}"
         - "sikalabs/{{ .ProjectName }}"
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.goreleaser
       ids:
         - "hello-world-server"
       build_flag_templates:
@@ -76,7 +76,7 @@ dockers:
       image_templates:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}-arm64v8"
         - "sikalabs/{{ .ProjectName }}:arm64v8"
-      dockerfile: Dockerfile.arm64v8
+      dockerfile: Dockerfile.goreleaser.arm64v8
       ids:
         - "hello-world-server"
       build_flag_templates:
