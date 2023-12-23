@@ -24,6 +24,7 @@ build-push-color-variants:
 	@make build-push-color-eon
 	@make build-push-color-ceps
 	@make build-push-color-generali
+	@make build-push-color-elm
 
 build-push-color-variant:
 	docker build \
@@ -232,3 +233,11 @@ build-push-color-generali:
 		--tag sikalabs/hello-world-server:generali \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:generali
+
+build-push-color-elm:
+	docker build \
+		--build-arg COLOR="#818285" \
+		--build-arg TEXT="Hello ELM!" \
+		--tag sikalabs/hello-world-server:elm \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:elm
