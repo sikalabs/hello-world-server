@@ -57,6 +57,9 @@ dockers:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}"
         - "sikalabs/{{ .ProjectName }}:stable"
         - "sikalabs/{{ .ProjectName }}"
+        - "ghcr.io/sikalabs/{{ .ProjectName }}:{{ .Tag }}"
+        - "ghcr.io/sikalabs/{{ .ProjectName }}:stable"
+        - "ghcr.io/sikalabs/{{ .ProjectName }}"
       dockerfile: Dockerfile.goreleaser
       ids:
         - "hello-world-server"
@@ -78,6 +81,9 @@ dockers:
         - "sikalabs/{{ .ProjectName }}:{{ .Tag }}-arm64v8"
         - "sikalabs/{{ .ProjectName }}:stable-arm64v8"
         - "sikalabs/{{ .ProjectName }}:arm64v8"
+        - "ghcr.io/sikalabs/{{ .ProjectName }}:{{ .Tag }}-arm64v8"
+        - "ghcr.io/sikalabs/{{ .ProjectName }}:stable-arm64v8"
+        - "ghcr.io/sikalabs/{{ .ProjectName }}:arm64v8"
       dockerfile: Dockerfile.goreleaser.arm64v8
       ids:
         - "hello-world-server"
