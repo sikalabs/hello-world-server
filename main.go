@@ -42,7 +42,11 @@ func indexPlainText(w http.ResponseWriter, hostname string) {
 
 func indexHTML(w http.ResponseWriter, hostname string) {
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprint(w, `<style>
+	fmt.Fprint(w, `<!DOCTYPE html>
+	<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>`+Text+`</title>
+	<style>
 	html, body {
 		height: 100%;
 		color: `+Color+`;
@@ -70,6 +74,8 @@ func indexHTML(w http.ResponseWriter, hostname string) {
 	}
 	</style>
 	<link rel="icon" href="/favicon.ico">
+	</head>
+	<body>
 	<section class="center-parent">
 		<div class="center-child">
 			<h1>
@@ -78,6 +84,7 @@ func indexHTML(w http.ResponseWriter, hostname string) {
 			<h2>`+hostname+`</h2>
 		</div>
 	</section>
+	</body></html>
 	`)
 }
 
