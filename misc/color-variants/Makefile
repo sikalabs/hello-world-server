@@ -25,6 +25,7 @@ build-push-color-variants:
 	@make build-push-color-ceps
 	@make build-push-color-generali
 	@make build-push-color-elm
+	@make build-push-color-t-mobile
 
 build-push-color-variant:
 	docker build \
@@ -241,3 +242,12 @@ build-push-color-elm:
 		--tag sikalabs/hello-world-server:elm \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:elm
+
+build-push-color-t-mobile:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="#E20074" \
+		--build-arg TEXT="Hello T-Mobile!" \
+		--tag sikalabs/hello-world-server:t-mobile \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:t-mobile
