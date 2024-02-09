@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/rs/zerolog"
 	"github.com/sikalabs/hello-world-server/version"
 )
@@ -22,6 +24,13 @@ var BackgroundColor = "white"
 var RunTimestamp time.Time
 var Text = "Hello World!"
 var Logger zerolog.Logger
+
+var promRequestsTotal = prometheus.NewCounterVec(
+	prometheus.CounterOpts{
+		Namespace: "hello_world_server",
+		Name:      "requests_total",
+		Help:      "Total number of requests per endpoint",
+	}, []string{"path"})
 
 type StatusResponse struct {
 	Counter              int    `json:"counter"`
@@ -89,6 +98,8 @@ func indexHTML(w http.ResponseWriter, hostname string) {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
+	promRequestsTotal.With(prometheus.Labels{"path": r.URL.Path}).Inc()
+
 	hostname, _ := os.Hostname()
 	Counter++
 	// Check if User-Agent header exists
@@ -112,6 +123,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 func versionAPI(w http.ResponseWriter, r *http.Request) {
+	promRequestsTotal.With(prometheus.Labels{"path": r.URL.Path}).Inc()
 	w.Header().Set("Content-Type", "application/json")
 	data, _ := json.Marshal(map[string]string{
 		"version": version.Version,
@@ -120,6 +132,7 @@ func versionAPI(w http.ResponseWriter, r *http.Request) {
 }
 
 func livez(w http.ResponseWriter, r *http.Request) {
+	promRequestsTotal.With(prometheus.Labels{"path": r.URL.Path}).Inc()
 	w.Header().Set("Content-Type", "application/json")
 	data, _ := json.Marshal(map[string]bool{
 		"live": true,
@@ -128,6 +141,7 @@ func livez(w http.ResponseWriter, r *http.Request) {
 }
 
 func readyz(w http.ResponseWriter, r *http.Request) {
+	promRequestsTotal.With(prometheus.Labels{"path": r.URL.Path}).Inc()
 	w.Header().Set("Content-Type", "application/json")
 	data, _ := json.Marshal(map[string]bool{
 		"ready": true,
@@ -136,6 +150,7 @@ func readyz(w http.ResponseWriter, r *http.Request) {
 }
 
 func status(w http.ResponseWriter, r *http.Request) {
+	promRequestsTotal.With(prometheus.Labels{"path": r.URL.Path}).Inc()
 	hostname, _ := os.Hostname()
 	w.Header().Set("Content-Type", "application/json")
 	data, _ := json.Marshal(StatusResponse{
@@ -150,9 +165,15 @@ func status(w http.ResponseWriter, r *http.Request) {
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
+	promRequestsTotal.With(prometheus.Labels{"path": r.URL.Path}).Inc()
 	w.Header().Set("Content-Type", "image/x-icon")
 	w.WriteHeader(http.StatusOK)
 	w.Write(favicon)
+}
+
+func metricsHandler(w http.ResponseWriter, r *http.Request) {
+	promRequestsTotal.With(prometheus.Labels{"path": r.URL.Path}).Inc()
+	promhttp.Handler().ServeHTTP(w, r)
 }
 
 func main() {
@@ -177,6 +198,8 @@ func main() {
 		port = envPort
 	}
 
+	prometheus.MustRegister(promRequestsTotal)
+
 	Logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 	RunTimestamp = time.Now()
 	http.HandleFunc("/", index)
@@ -189,6 +212,7 @@ func main() {
 	http.HandleFunc("/api/status", status)
 	http.HandleFunc("/status", status)
 	http.HandleFunc("/favicon.ico", faviconHandler)
+	http.HandleFunc("/metrics", metricsHandler)
 
 	hostname, _ := os.Hostname()
 	Logger.Info().Str("hostname", hostname).Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port)
