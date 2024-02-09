@@ -26,6 +26,7 @@ build-push-color-variants:
 	@make build-push-color-generali
 	@make build-push-color-elm
 	@make build-push-color-t-mobile
+	@make build-push-color-jt
 
 build-push-color-variant:
 	docker build \
@@ -251,3 +252,12 @@ build-push-color-t-mobile:
 		--tag sikalabs/hello-world-server:t-mobile \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:t-mobile
+
+build-push-color-jt:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="black" \
+		--build-arg TEXT="Hello J&T!" \
+		--tag sikalabs/hello-world-server:jt \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:jt
