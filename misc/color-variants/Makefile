@@ -28,6 +28,7 @@ build-push-color-variants:
 	@make build-push-color-t-mobile
 	@make build-push-color-jt
 	@make build-push-color-rozhlas
+	@make build-push-color-era
 
 build-push-color-variant:
 	docker build \
@@ -272,3 +273,11 @@ build-push-color-rozhlas:
 		--tag sikalabs/hello-world-server:rozhlas \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:rozhlas
+
+build-push-color-era:
+	docker build \
+		--build-arg COLOR="#B8173E" \
+		--build-arg TEXT="Hello ERA!" \
+		--tag sikalabs/hello-world-server:era \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:era
