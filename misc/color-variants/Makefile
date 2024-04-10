@@ -27,6 +27,7 @@ build-push-color-variants:
 	@make build-push-color-elm
 	@make build-push-color-t-mobile
 	@make build-push-color-jt
+	@make build-push-color-rozhlas
 
 build-push-color-variant:
 	docker build \
@@ -261,3 +262,13 @@ build-push-color-jt:
 		--tag sikalabs/hello-world-server:jt \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:jt
+
+
+build-push-color-rozhlas:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="#07183D" \
+		--build-arg TEXT="Hello Rozhlas!" \
+		--tag sikalabs/hello-world-server:rozhlas \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:rozhlas
