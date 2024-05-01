@@ -169,6 +169,8 @@ build-push-color-ttc:
 build-push-color-tietoevry:
 	docker build \
 		--build-arg TEXT="Hello Tietoevry!" \
+		--build-arg BACKGROUND_COLOR="#280071" \
+		--build-arg COLOR="white" \
 		--tag sikalabs/hello-world-server:tietoevry \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:tietoevry
