@@ -29,6 +29,7 @@ build-push-color-variants:
 	@make build-push-color-jt
 	@make build-push-color-rozhlas
 	@make build-push-color-era
+	@make build-push-color-ogilvy
 
 build-push-color-variant:
 	docker build \
@@ -283,3 +284,12 @@ build-push-color-era:
 		--tag sikalabs/hello-world-server:era \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:era
+
+build-push-color-ogilvy:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="#EB3F42" \
+		--build-arg TEXT="Hello Ogilvy!" \
+		--tag sikalabs/hello-world-server:ogilvy \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:ogilvy
