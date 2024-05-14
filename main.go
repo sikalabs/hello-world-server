@@ -1,12 +1,15 @@
 package main
 
 import (
+	"context"
 	_ "embed"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -119,7 +122,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		// If User-Agent header doesn't exists, use plain text
 		indexPlainText(w, hostname)
 	}
-	Logger.Info().Str("hostname", hostname).Str("method", r.Method).Str("path", r.URL.Path).Msg(r.Method + " " + r.URL.Path)
+	Logger.Info().Str("server", "main").Str("hostname", hostname).Str("method", r.Method).Str("path", r.URL.Path).Msg(r.Method + " " + r.URL.Path)
 }
 
 func versionAPI(w http.ResponseWriter, r *http.Request) {
@@ -176,6 +179,40 @@ func metricsHandler(w http.ResponseWriter, r *http.Request) {
 	promhttp.Handler().ServeHTTP(w, r)
 }
 
+var MainServer http.Server
+var MetricsServer http.Server
+
+func mainServer(port string, hostname string) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", index)
+	mux.HandleFunc("/api/version", versionAPI)
+	mux.HandleFunc("/version", versionAPI)
+	mux.HandleFunc("/api/livez", livez)
+	mux.HandleFunc("/livez", livez)
+	mux.HandleFunc("/api/readyz", readyz)
+	mux.HandleFunc("/readyz", readyz)
+	mux.HandleFunc("/api/status", status)
+	mux.HandleFunc("/status", status)
+	mux.HandleFunc("/favicon.ico", faviconHandler)
+	MainServer.Handler = mux
+	MainServer.Addr = ":" + port
+	Logger.Info().Str("hostname", hostname).Str("server", "main").Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port)
+	if err := MainServer.ListenAndServe(); err != http.ErrServerClosed {
+		Logger.Fatal().Str("hostname", hostname).Str("server", "main").Msg(err.Error())
+	}
+}
+
+func metricsServer(port string, hostname string) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/metrics", metricsHandler)
+	MetricsServer.Addr = ":8001"
+	MetricsServer.Handler = mux
+	Logger.Info().Str("hostname", hostname).Str("server", "metrics").Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port + "/metrics")
+	if err := MetricsServer.ListenAndServe(); err != http.ErrServerClosed {
+		Logger.Fatal().Str("hostname", hostname).Str("server", "main").Msg(err.Error())
+	}
+}
+
 func main() {
 	backgroundCounterEnv := os.Getenv("BACKGROUND_COLOR")
 	if backgroundCounterEnv != "" {
@@ -198,26 +235,40 @@ func main() {
 		port = envPort
 	}
 
+	portMetrics := "8001"
+	envPortMetrics := os.Getenv("PORT_METRICS")
+	if envPortMetrics != "" {
+		portMetrics = envPortMetrics
+	}
+
 	prometheus.MustRegister(promRequestsTotal)
 
 	Logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 	RunTimestamp = time.Now()
-	http.HandleFunc("/", index)
-	http.HandleFunc("/api/version", versionAPI)
-	http.HandleFunc("/version", versionAPI)
-	http.HandleFunc("/api/livez", livez)
-	http.HandleFunc("/livez", livez)
-	http.HandleFunc("/api/readyz", readyz)
-	http.HandleFunc("/readyz", readyz)
-	http.HandleFunc("/api/status", status)
-	http.HandleFunc("/status", status)
-	http.HandleFunc("/favicon.ico", faviconHandler)
-	http.HandleFunc("/metrics", metricsHandler)
 
 	hostname, _ := os.Hostname()
-	Logger.Info().Str("hostname", hostname).Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port)
-	err := http.ListenAndServe("0.0.0.0:"+port, nil)
-	if err != nil {
-		Logger.Fatal().Str("hostname", hostname).Msg(err.Error())
+
+	go mainServer(port, hostname)
+	go metricsServer(portMetrics, hostname)
+
+	// Setting up signal capturing
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
+
+	// Block until a signal is received
+	<-stop
+
+	// Create a deadline to wait for.
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	// Doesn't block if no connections, but will otherwise wait
+	// until the timeout deadline.
+	Logger.Info().Str("hostname", hostname).Msg("Shutting down gracefully, press Ctrl+C again to force")
+	if err := MainServer.Shutdown(ctx); err != nil {
+		Logger.Error().Str("hostname", hostname).Str("server", "main").Msgf("Could not gracefully shutdown the server: %v\n", err)
+	}
+	if err := MetricsServer.Shutdown(ctx); err != nil {
+		Logger.Error().Str("hostname", hostname).Str("server", "metrics").Msgf("Could not gracefully shutdown the server: %v\n", err)
 	}
 }
