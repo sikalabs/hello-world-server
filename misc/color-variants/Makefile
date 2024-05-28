@@ -30,6 +30,7 @@ build-push-color-variants:
 	@make build-push-color-rozhlas
 	@make build-push-color-era
 	@make build-push-color-ogilvy
+	@make build-push-color-dhl
 
 build-push-color-variant:
 	docker build \
@@ -293,3 +294,12 @@ build-push-color-ogilvy:
 		--tag sikalabs/hello-world-server:ogilvy \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ogilvy
+
+build-push-color-dhl:
+	docker build \
+		--build-arg COLOR="#D40410" \
+		--build-arg BACKGROUND_COLOR="#FFCC01" \
+		--build-arg TEXT="Hello DHL!" \
+		--tag sikalabs/hello-world-server:dhl \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:dhl
