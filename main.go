@@ -205,7 +205,7 @@ func mainServer(port string, hostname string) {
 func metricsServer(port string, hostname string) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/metrics", metricsHandler)
-	MetricsServer.Addr = ":8001"
+	MetricsServer.Addr = ":" + port
 	MetricsServer.Handler = mux
 	Logger.Info().Str("hostname", hostname).Str("server", "metrics").Msg("Server started on 0.0.0.0:" + port + ", see http://127.0.0.1:" + port + "/metrics")
 	if err := MetricsServer.ListenAndServe(); err != http.ErrServerClosed {
