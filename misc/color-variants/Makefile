@@ -32,6 +32,7 @@ build-push-color-variants:
 	@make build-push-color-ogilvy
 	@make build-push-color-dhl
 	@make build-push-color-kcd
+	@make build-push-color-gpe
 
 build-push-color-variant:
 	docker build \
@@ -313,3 +314,12 @@ build-push-color-kcd:
 		--tag sikalabs/hello-world-server:kcd \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:kcd
+
+build-push-color-gpe:
+	docker build \
+		--build-arg COLOR="#013C73" \
+		--build-arg BACKGROUND_COLOR="white" \
+		--build-arg TEXT="Hello GPE!" \
+		--tag sikalabs/hello-world-server:gpe \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:gpe
