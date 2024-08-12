@@ -33,6 +33,7 @@ build-push-color-variants:
 	@make build-push-color-dhl
 	@make build-push-color-kcd
 	@make build-push-color-gpe
+	@make build-push-color-exainfra
 
 build-push-color-variant:
 	docker build \
@@ -323,3 +324,12 @@ build-push-color-gpe:
 		--tag sikalabs/hello-world-server:gpe \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:gpe
+
+build-push-color-exainfra:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="#426690" \
+		--build-arg TEXT="Hello EXA Infra!" \
+		--tag sikalabs/hello-world-server:exainfra \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:exainfra
