@@ -34,6 +34,7 @@ build-push-color-variants:
 	@make build-push-color-kcd
 	@make build-push-color-gpe
 	@make build-push-color-exainfra
+	@make build-push-color-linuxdays
 
 build-push-color-variant:
 	docker build \
@@ -333,3 +334,12 @@ build-push-color-exainfra:
 		--tag sikalabs/hello-world-server:exainfra \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:exainfra
+
+build-push-color-linuxdays:
+	docker build \
+		--build-arg COLOR="#FAAF3A" \
+		--build-arg BACKGROUND_COLOR="#EEEEEE" \
+		--build-arg TEXT="Hello LinuxDays!" \
+		--tag sikalabs/hello-world-server:linuxdays \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:linuxdays
