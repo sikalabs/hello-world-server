@@ -229,6 +229,11 @@ func main() {
 		Text = textEnv
 	}
 
+	textSuffixEnv := os.Getenv("TEXT_SUFFIX")
+	if textSuffixEnv != "" {
+		Text = Text + " " + textSuffixEnv
+	}
+
 	port := "8000"
 	envPort := os.Getenv("PORT")
 	if envPort != "" {
