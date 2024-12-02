@@ -74,7 +74,7 @@ build-push-color-cra:
 		--tag ghcr.io/sikalabs/hello-world-server:cra \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:cra
-	docekr push ghcr.io/sikalabs/hello-world-server:cra
+	docker push ghcr.io/sikalabs/hello-world-server:cra
 
 build-push-color-lekarna-cz:
 	docker build \
