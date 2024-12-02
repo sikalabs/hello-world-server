@@ -50,6 +50,7 @@ build-push-color-ondrejsika:
 		--build-arg COLOR="#C7BFB0" \
 		--build-arg BACKGROUND_COLOR="#131480" \
 		--tag sikalabs/hello-world-server:ondrejsika \
+		--tag ghcr.io/sikalabs/hello-world-server:ondrejsika \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ondrejsika
 	docker push ghcr.io/sikalabs/hello-world-server:ondrejsika
@@ -60,6 +61,7 @@ build-push-color-devopslive:
 		--build-arg BACKGROUND_COLOR="#131480" \
 		--build-arg TEXT="Hello DevOps Live!" \
 		--tag sikalabs/hello-world-server:devopslive \
+		--tag ghcr.io/sikalabs/hello-world-server:devopslive \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:devopslive
 	docker push ghcr.io/sikalabs/hello-world-server:devopslive
@@ -69,6 +71,7 @@ build-push-color-cra:
 		--build-arg COLOR="#F99D1C" \
 		--build-arg TEXT="Hello CRA!" \
 		--tag sikalabs/hello-world-server:cra \
+		--tag ghcr.io/sikalabs/hello-world-server:cra \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:cra
 	docekr push ghcr.io/sikalabs/hello-world-server:cra
@@ -79,6 +82,7 @@ build-push-color-lekarna-cz:
 		--build-arg BACKGROUND_COLOR="green " \
 		--build-arg TEXT="Hello Lekarna.cz!" \
 		--tag sikalabs/hello-world-server:lekarna-cz \
+		--tag ghcr.io/sikalabs/hello-world-server:lekarna-cz \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:lekarna-cz
 	docker push ghcr.io/sikalabs/hello-world-server:lekarna-cz
@@ -88,6 +92,7 @@ build-push-color-o2:
 		--build-arg COLOR="#010066" \
 		--build-arg TEXT="Hello O2!" \
 		--tag sikalabs/hello-world-server:o2 \
+		--tag ghcr.io/sikalabs/hello-world-server:o2 \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:o2
 	docker push ghcr.io/sikalabs/hello-world-server:o2
@@ -98,6 +103,7 @@ build-push-color-trask:
 		--build-arg COLOR="#204895" \
 		--build-arg TEXT="Hello TRASK!" \
 		--tag sikalabs/hello-world-server:trask \
+		--tag ghcr.io/sikalabs/hello-world-server:trask \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:trask
 	docker push ghcr.io/sikalabs/hello-world-server:trask
@@ -108,6 +114,7 @@ build-push-color-mstp:
 		--build-arg COLOR="white" \
 		--build-arg TEXT="Hello MSTP!" \
 		--tag sikalabs/hello-world-server:mstp \
+		--tag ghcr.io/sikalabs/hello-world-server:mstp \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:mstp
 	docker push ghcr.io/sikalabs/hello-world-server:mstp
@@ -118,6 +125,7 @@ build-push-color-atos:
 		--build-arg COLOR="white" \
 		--build-arg TEXT="Hello AtoS!" \
 		--tag sikalabs/hello-world-server:atos \
+		--tag ghcr.io/sikalabs/hello-world-server:atos \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:atos
 	docker push ghcr.io/sikalabs/hello-world-server:atos
@@ -128,6 +136,7 @@ build-push-color-mavenir:
 		--build-arg COLOR="#00558A" \
 		--build-arg TEXT="Hello Mavenir!" \
 		--tag sikalabs/hello-world-server:mavenir \
+		--tag ghcr.io/sikalabs/hello-world-server:mavenir \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:mavenir
 	docker push ghcr.io/sikalabs/hello-world-server:mavenir
@@ -138,6 +147,7 @@ build-push-color-ogsoft:
 		--build-arg COLOR="#F07D00" \
 		--build-arg TEXT="Hello OGSOFT!" \
 		--tag sikalabs/hello-world-server:ogsoft \
+		--tag ghcr.io/sikalabs/hello-world-server:ogsoft \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ogsoft
 	docker push ghcr.io/sikalabs/hello-world-server:ogsoft
@@ -148,6 +158,7 @@ build-push-color-fingood:
 		--build-arg COLOR="#434750" \
 		--build-arg TEXT="Hello Fingood!" \
 		--tag sikalabs/hello-world-server:fingood \
+		--tag ghcr.io/sikalabs/hello-world-server:fingood \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:fingood
 	docker push ghcr.io/sikalabs/hello-world-server:fingood
@@ -158,6 +169,7 @@ build-push-color-trz:
 		--build-arg COLOR="white" \
 		--build-arg TEXT="Hello TRZ!" \
 		--tag sikalabs/hello-world-server:trz \
+		--tag ghcr.io/sikalabs/hello-world-server:trz \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:trz
 	docker push ghcr.io/sikalabs/hello-world-server:trz
@@ -167,6 +179,7 @@ build-push-color-thermofisher:
 		--build-arg COLOR="#DB1215" \
 		--build-arg TEXT="Hello Thermo Fisher!" \
 		--tag sikalabs/hello-world-server:thermofisher \
+		--tag ghcr.io/sikalabs/hello-world-server:thermofisher \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:thermofisher
 	docker push ghcr.io/sikalabs/hello-world-server:thermofisher
@@ -176,6 +189,7 @@ build-push-color-aardwark:
 		--build-arg COLOR="#734FAA" \
 		--build-arg TEXT="Hello Aardwark!" \
 		--tag sikalabs/hello-world-server:aardwark \
+		--tag ghcr.io/sikalabs/hello-world-server:aardwark \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:aardwark
 	docker push ghcr.io/sikalabs/hello-world-server:aardwark
@@ -185,6 +199,7 @@ build-push-color-ttc:
 		--build-arg COLOR="#0AB7E6" \
 		--build-arg TEXT="Hello TTC!" \
 		--tag sikalabs/hello-world-server:ttc \
+		--tag ghcr.io/sikalabs/hello-world-server:ttc \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ttc
 	docker push ghcr.io/sikalabs/hello-world-server:ttc
@@ -195,6 +210,7 @@ build-push-color-tietoevry:
 		--build-arg BACKGROUND_COLOR="#280071" \
 		--build-arg COLOR="white" \
 		--tag sikalabs/hello-world-server:tietoevry \
+		--tag ghcr.io/sikalabs/hello-world-server:tietoevry \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:tietoevry
 	docker push ghcr.io/sikalabs/hello-world-server:tietoevry
@@ -204,6 +220,7 @@ build-push-color-animato:
 		--build-arg COLOR="#F80200" \
 		--build-arg TEXT="Hello Animato!" \
 		--tag sikalabs/hello-world-server:animato \
+		--tag ghcr.io/sikalabs/hello-world-server:animato \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:animato
 	docker push ghcr.io/sikalabs/hello-world-server:animato
@@ -213,6 +230,7 @@ build-push-color-spcss:
 		--build-arg COLOR="#009ADB" \
 		--build-arg TEXT="Hello SPCSS!" \
 		--tag sikalabs/hello-world-server:spcss \
+		--tag ghcr.io/sikalabs/hello-world-server:spcss \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:spcss
 	docker push ghcr.io/sikalabs/hello-world-server:spcss
@@ -222,6 +240,7 @@ build-push-color-frequentis:
 		--build-arg COLOR="#F80200" \
 		--build-arg TEXT="Hello Frequentis!" \
 		--tag sikalabs/hello-world-server:frequentis \
+		--tag ghcr.io/sikalabs/hello-world-server:frequentis \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:frequentis
 	docker push ghcr.io/sikalabs/hello-world-server:frequentis
@@ -231,6 +250,7 @@ build-push-color-digiteq:
 		--build-arg COLOR="#185DB2" \
 		--build-arg TEXT="Hello Digiteq!" \
 		--tag sikalabs/hello-world-server:digiteq \
+		--tag ghcr.io/sikalabs/hello-world-server:digiteq \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:digiteq
 	docker push ghcr.io/sikalabs/hello-world-server:digiteq
@@ -240,6 +260,7 @@ build-push-color-heidelbergmaterials:
 		--build-arg COLOR="#004E2B" \
 		--build-arg TEXT="Hello Heidelberg Materials!" \
 		--tag sikalabs/hello-world-server:heidelbergmaterials \
+		--tag ghcr.io/sikalabs/hello-world-server:heidelbergmaterials \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:heidelbergmaterials
 	docker push ghcr.io/sikalabs/hello-world-server:heidelbergmaterials
@@ -249,6 +270,7 @@ build-push-color-eon:
 		--build-arg COLOR="#EA1B0A" \
 		--build-arg TEXT="Hello EON!" \
 		--tag sikalabs/hello-world-server:eon \
+		--tag ghcr.io/sikalabs/hello-world-server:eon \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:eon
 	docker push ghcr.io/sikalabs/hello-world-server:eon
@@ -259,6 +281,7 @@ build-push-color-ceps:
 		--build-arg COLOR="white" \
 		--build-arg TEXT="Hello CEPS!" \
 		--tag sikalabs/hello-world-server:ceps \
+		--tag ghcr.io/sikalabs/hello-world-server:ceps \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ceps
 	docker push ghcr.io/sikalabs/hello-world-server:ceps
@@ -268,6 +291,7 @@ build-push-color-generali:
 		--build-arg COLOR="#C21B18" \
 		--build-arg TEXT="Hello Generali!" \
 		--tag sikalabs/hello-world-server:generali \
+		--tag ghcr.io/sikalabs/hello-world-server:generali \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:generali
 	docker push ghcr.io/sikalabs/hello-world-server:generali
@@ -277,6 +301,7 @@ build-push-color-elm:
 		--build-arg COLOR="#818285" \
 		--build-arg TEXT="Hello ELM!" \
 		--tag sikalabs/hello-world-server:elm \
+		--tag ghcr.io/sikalabs/hello-world-server:elm \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:elm
 	docker push ghcr.io/sikalabs/hello-world-server:elm
@@ -287,6 +312,7 @@ build-push-color-t-mobile:
 		--build-arg BACKGROUND_COLOR="#E20074" \
 		--build-arg TEXT="Hello T-Mobile!" \
 		--tag sikalabs/hello-world-server:t-mobile \
+		--tag ghcr.io/sikalabs/hello-world-server:t-mobile \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:t-mobile
 	docker push ghcr.io/sikalabs/hello-world-server:t-mobile
@@ -297,6 +323,7 @@ build-push-color-jt:
 		--build-arg BACKGROUND_COLOR="black" \
 		--build-arg TEXT="Hello J&T!" \
 		--tag sikalabs/hello-world-server:jt \
+		--tag ghcr.io/sikalabs/hello-world-server:jt \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:jt
 	docker push ghcr.io/sikalabs/hello-world-server:jt
@@ -308,6 +335,7 @@ build-push-color-rozhlas:
 		--build-arg BACKGROUND_COLOR="#07183D" \
 		--build-arg TEXT="Hello Rozhlas!" \
 		--tag sikalabs/hello-world-server:rozhlas \
+		--tag ghcr.io/sikalabs/hello-world-server:rozhlas \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:rozhlas
 	docker push ghcr.io/sikalabs/hello-world-server:rozhlas
@@ -317,6 +345,7 @@ build-push-color-era:
 		--build-arg COLOR="#B8173E" \
 		--build-arg TEXT="Hello ERA!" \
 		--tag sikalabs/hello-world-server:era \
+		--tag ghcr.io/sikalabs/hello-world-server:era \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:era
 	docker push ghcr.io/sikalabs/hello-world-server:era
@@ -327,6 +356,7 @@ build-push-color-ogilvy:
 		--build-arg BACKGROUND_COLOR="#EB3F42" \
 		--build-arg TEXT="Hello Ogilvy!" \
 		--tag sikalabs/hello-world-server:ogilvy \
+		--tag ghcr.io/sikalabs/hello-world-server:ogilvy \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ogilvy
 	docker push ghcr.io/sikalabs/hello-world-server:ogilvy
@@ -337,6 +367,7 @@ build-push-color-dhl:
 		--build-arg BACKGROUND_COLOR="#FFCC01" \
 		--build-arg TEXT="Hello DHL!" \
 		--tag sikalabs/hello-world-server:dhl \
+		--tag ghcr.io/sikalabs/hello-world-server:dhl \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:dhl
 	docker push ghcr.io/sikalabs/hello-world-server:dhl
@@ -347,6 +378,7 @@ build-push-color-kcd:
 		--build-arg BACKGROUND_COLOR="#0D304E" \
 		--build-arg TEXT="Hello KCD!" \
 		--tag sikalabs/hello-world-server:kcd \
+		--tag ghcr.io/sikalabs/hello-world-server:kcd \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:kcd
 	docker push ghcr.io/sikalabs/hello-world-server:kcd
@@ -357,6 +389,7 @@ build-push-color-gpe:
 		--build-arg BACKGROUND_COLOR="white" \
 		--build-arg TEXT="Hello GPE!" \
 		--tag sikalabs/hello-world-server:gpe \
+		--tag ghcr.io/sikalabs/hello-world-server:gpe \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:gpe
 	docker push ghcr.io/sikalabs/hello-world-server:gpe
@@ -367,6 +400,7 @@ build-push-color-exainfra:
 		--build-arg BACKGROUND_COLOR="#426690" \
 		--build-arg TEXT="Hello EXA Infra!" \
 		--tag sikalabs/hello-world-server:exainfra \
+		--tag ghcr.io/sikalabs/hello-world-server:exainfra \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:exainfra
 	docker push ghcr.io/sikalabs/hello-world-server:exainfra
@@ -377,6 +411,7 @@ build-push-color-linuxdays:
 		--build-arg BACKGROUND_COLOR="#EEEEEE" \
 		--build-arg TEXT="Hello LinuxDays!" \
 		--tag sikalabs/hello-world-server:linuxdays \
+		--tag ghcr.io/sikalabs/hello-world-server:linuxdays \
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:linuxdays
 	docker push ghcr.io/sikalabs/hello-world-server:linuxdays
