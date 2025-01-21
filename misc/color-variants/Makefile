@@ -35,6 +35,7 @@ build-push-color-variants:
 	@make build-push-color-gpe
 	@make build-push-color-exainfra
 	@make build-push-color-linuxdays
+	@make build-push-color-eventlook
 
 build-push-color-variant:
 	docker build \
@@ -415,3 +416,14 @@ build-push-color-linuxdays:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:linuxdays
 	docker push ghcr.io/sikalabs/hello-world-server:linuxdays
+
+build-push-color-eventlook:
+	docker build \
+		--build-arg COLOR="#F9541C" \
+		--build-arg BACKGROUND_COLOR="#160F1A" \
+		--build-arg TEXT="Hello EventLook!" \
+		--tag sikalabs/hello-world-server:eventlook \
+		--tag ghcr.io/sikalabs/hello-world-server:eventlook \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:eventlook
+	docker push ghcr.io/sikalabs/hello-world-server:eventlook
