@@ -36,6 +36,7 @@ build-push-color-variants:
 	@make build-push-color-exainfra
 	@make build-push-color-linuxdays
 	@make build-push-color-eventlook
+	@make build-push-color-adbros
 
 build-push-color-variant:
 	docker build \
@@ -427,3 +428,14 @@ build-push-color-eventlook:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:eventlook
 	docker push ghcr.io/sikalabs/hello-world-server:eventlook
+
+build-push-color-adbros:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="#B51A82" \
+		--build-arg TEXT="Hello Adbros!" \
+		--tag sikalabs/hello-world-server:adbros \
+		--tag ghcr.io/sikalabs/hello-world-server:adbros \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:adbros
+	docker push ghcr.io/sikalabs/hello-world-server:adbros
