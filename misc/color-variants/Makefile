@@ -38,6 +38,7 @@ build-push-color-variants:
 	@make build-push-color-eventlook
 	@make build-push-color-adbros
 	@make build-push-color-cloud-native-bratislava
+	@make build-push-color-continental
 
 build-push-color-variant:
 	docker build \
@@ -451,3 +452,14 @@ build-push-color-cloud-native-bratislava:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:cloud-native-bratislava
 	docker push ghcr.io/sikalabs/hello-world-server:cloud-native-bratislava
+
+build-push-color-continental:
+	docker build \
+		--build-arg COLOR="black" \
+		--build-arg BACKGROUND_COLOR="#FFA500" \
+		--build-arg TEXT="Hello Continental!" \
+		--tag sikalabs/hello-world-server:continental \
+		--tag ghcr.io/sikalabs/hello-world-server:continental \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:continental
+	docker push ghcr.io/sikalabs/hello-world-server:continental
