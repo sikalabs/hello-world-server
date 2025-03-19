@@ -37,6 +37,7 @@ build-push-color-variants:
 	@make build-push-color-linuxdays
 	@make build-push-color-eventlook
 	@make build-push-color-adbros
+	@make build-push-color-cloud-native-bratislava
 
 build-push-color-variant:
 	docker build \
@@ -439,3 +440,14 @@ build-push-color-adbros:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:adbros
 	docker push ghcr.io/sikalabs/hello-world-server:adbros
+
+build-push-color-cloud-native-bratislava:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="#042285" \
+		--build-arg TEXT="Hello Cloud Native Bratislava!" \
+		--tag sikalabs/hello-world-server:cloud-native-bratislava \
+		--tag ghcr.io/sikalabs/hello-world-server:cloud-native-bratislava \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:cloud-native-bratislava
+	docker push ghcr.io/sikalabs/hello-world-server:cloud-native-bratislava
