@@ -39,6 +39,7 @@ build-push-color-variants:
 	@make build-push-color-adbros
 	@make build-push-color-cloud-native-bratislava
 	@make build-push-color-continental
+	@make build-push-color-cez
 
 build-push-color-variant:
 	docker build \
@@ -463,3 +464,14 @@ build-push-color-continental:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:continental
 	docker push ghcr.io/sikalabs/hello-world-server:continental
+
+build-push-color-cez:
+	docker build \
+		--build-arg COLOR="#F24F01" \
+		--build-arg BACKGROUND_COLOR="white" \
+		--build-arg TEXT="Hello CEZ!" \
+		--tag sikalabs/hello-world-server:cez \
+		--tag ghcr.io/sikalabs/hello-world-server:cez \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:cez
+	docker push ghcr.io/sikalabs/hello-world-server:cez
