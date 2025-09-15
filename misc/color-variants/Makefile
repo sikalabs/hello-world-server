@@ -40,6 +40,7 @@ build-push-color-variants:
 	@make build-push-color-cloud-native-bratislava
 	@make build-push-color-continental
 	@make build-push-color-cez
+	@make build-push-color-vitkovice
 
 build-push-color-variant:
 	docker build \
@@ -475,3 +476,18 @@ build-push-color-cez:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:cez
 	docker push ghcr.io/sikalabs/hello-world-server:cez
+
+build-push-color-vitkovice:
+	docker build \
+		--build-arg COLOR="white" \
+		--build-arg BACKGROUND_COLOR="#21334C" \
+		--build-arg TEXT="Hello VITKOVICE!" \
+		--tag sikalabs/hello-world-server:vitkovice \
+		--tag ghcr.io/sikalabs/hello-world-server:vitkovice \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:vitkovice
+	docker push ghcr.io/sikalabs/hello-world-server:vitkovice
+		--tag ghcr.io/sikalabs/hello-world-server:vitkovice \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:vitkovice
+	docker push ghcr.io/sikalabs/hello-world-server:vitkovice
