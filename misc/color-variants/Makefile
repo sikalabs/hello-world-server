@@ -41,6 +41,7 @@ build-push-color-variants:
 	@make build-push-color-continental
 	@make build-push-color-cez
 	@make build-push-color-vitkovice
+	@make build-push-color-ostrava
 
 build-push-color-variant:
 	docker build \
@@ -491,3 +492,14 @@ build-push-color-vitkovice:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:vitkovice
 	docker push ghcr.io/sikalabs/hello-world-server:vitkovice
+
+build-push-color-ostrava:
+	docker build \
+		--build-arg COLOR="#00AFD3" \
+		--build-arg BACKGROUND_COLOR="white" \
+		--build-arg TEXT="Hello OSTRAVA!!!" \
+		--tag sikalabs/hello-world-server:ostrava \
+		--tag ghcr.io/sikalabs/hello-world-server:ostrava \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:ostrava
+	docker push ghcr.io/sikalabs/hello-world-server:ostrava
