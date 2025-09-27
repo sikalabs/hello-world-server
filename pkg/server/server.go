@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"strings"
 	"syscall"
 	"time"
@@ -213,25 +214,50 @@ func metricsServer(port string, hostname string) {
 	}
 }
 
-func Server() {
+func setBackgroundColorFromEnv() {
 	backgroundCounterEnv := os.Getenv("BACKGROUND_COLOR")
 	if backgroundCounterEnv != "" {
 		BackgroundColor = backgroundCounterEnv
 	}
+}
 
+func setColorFromEnv() {
 	counterEnv := os.Getenv("COLOR")
 	if counterEnv != "" {
 		Color = counterEnv
 	}
+}
 
+func setTextFromEnv() {
 	textEnv := os.Getenv("TEXT")
 	if textEnv != "" {
 		Text = textEnv
 	}
-
 	textSuffixEnv := os.Getenv("TEXT_SUFFIX")
 	if textSuffixEnv != "" {
 		Text = Text + " " + textSuffixEnv
+	}
+}
+
+func Server() {
+	hostname, _ := os.Hostname()
+
+	setColorFromEnv()
+	setBackgroundColorFromEnv()
+	setTextFromEnv()
+
+	refreshInterval, _ := strconv.Atoi(os.Getenv("REFRESH_INTERVAL"))
+
+	if refreshInterval > 0 {
+		go func() {
+			for {
+				setColorFromEnv()
+				setBackgroundColorFromEnv()
+				setTextFromEnv()
+
+				time.Sleep(time.Duration(refreshInterval) * time.Second)
+			}
+		}()
 	}
 
 	port := "8000"
@@ -250,8 +276,6 @@ func Server() {
 
 	Logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 	RunTimestamp = time.Now()
-
-	hostname, _ := os.Hostname()
 
 	go mainServer(port, hostname)
 	go metricsServer(portMetrics, hostname)
