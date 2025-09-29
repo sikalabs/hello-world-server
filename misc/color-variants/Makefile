@@ -1,5 +1,6 @@
 build-push-color-variants:
 	@make build-push-color-ondrejsika
+	@make build-push-color-argocd
 	@make build-push-color-devopslive
 	@make build-push-color-variant BACKGROUND_COLOR=green
 	@make build-push-color-variant BACKGROUND_COLOR=blue
@@ -61,6 +62,15 @@ build-push-color-ondrejsika:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ondrejsika
 	docker push ghcr.io/sikalabs/hello-world-server:ondrejsika
+
+build-push-color-argocd:
+	docker build \
+		--build-arg TEXT="Hello ArgoCD!" \
+		--tag sikalabs/hello-world-server:argocd \
+		--tag ghcr.io/sikalabs/hello-world-server:argocd \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:argocd
+	docker push ghcr.io/sikalabs/hello-world-server:argocd
 
 build-push-color-devopslive:
 	docker build \
