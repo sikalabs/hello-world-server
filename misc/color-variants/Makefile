@@ -43,6 +43,7 @@ build-push-color-variants:
 	@make build-push-color-cez
 	@make build-push-color-vitkovice
 	@make build-push-color-ostrava
+	@make build-push-color-ataccama
 
 build-push-color-variant:
 	docker build \
@@ -513,3 +514,14 @@ build-push-color-ostrava:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ostrava
 	docker push ghcr.io/sikalabs/hello-world-server:ostrava
+
+build-push-color-ataccama:
+	docker build \
+		--build-arg COLOR="#A30053" \
+		--build-arg BACKGROUND_COLOR="white" \
+		--build-arg TEXT="Hello Ataccama!" \
+		--tag sikalabs/hello-world-server:ataccama \
+		--tag ghcr.io/sikalabs/hello-world-server:ataccama \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:ataccama
+	docker push ghcr.io/sikalabs/hello-world-server:ataccama
