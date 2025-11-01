@@ -1,4 +1,4 @@
-FROM arm64v8/debian:11-slim
+FROM arm64v8/debian:13-slim
 LABEL org.opencontainers.image.source https://github.com/sikalabs/hello-world-server
 COPY hello-world-server /usr/local/bin
 CMD [ "/usr/local/bin/hello-world-server" ]
