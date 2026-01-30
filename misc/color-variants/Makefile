@@ -537,3 +537,13 @@ build-push-color-ica:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:ica
 	docker push ghcr.io/sikalabs/hello-world-server:ica
+
+build-push-color-egd:
+	docker build \
+		--build-arg COLOR="#E13119" \
+		--build-arg TEXT="Hello EG.D!" \
+		--tag sikalabs/hello-world-server:egd \
+		--tag ghcr.io/sikalabs/hello-world-server:egd \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:egd
+	docker push ghcr.io/sikalabs/hello-world-server:egd
