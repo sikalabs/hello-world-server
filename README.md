@@ -7,3 +7,9 @@
 - `BACKGROUND_COLOR` - Color of the background, default is "white"
 - `PORT` - primary port, default "8000"
 - `PORT_METRICS` - port for prometheus metrics endpoint, default "8001"
+
+## Container Image
+
+```
+ghcr.io/sikalabs/hello-world-server
+```
