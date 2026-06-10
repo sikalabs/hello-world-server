@@ -45,6 +45,7 @@ build-push-color-variants:
 	@make build-push-color-ostrava
 	@make build-push-color-ataccama
 	@make build-push-color-ica
+	@make build-push-color-egd
 
 build-push-color-variant:
 	docker build \
