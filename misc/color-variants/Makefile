@@ -47,6 +47,7 @@ build-push-color-variants:
 	@make build-push-color-ica
 	@make build-push-color-egd
 	@make build-push-color-adecco
+	@make build-push-color-bosch
 
 build-push-color-variant:
 	docker build \
@@ -560,3 +561,13 @@ build-push-color-adecco:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:adecco
 	docker push ghcr.io/sikalabs/hello-world-server:adecco
+
+build-push-color-bosch:
+	docker build \
+		--build-arg COLOR="#ED0008" \
+		--build-arg TEXT="Hello BOSCH!" \
+		--tag sikalabs/hello-world-server:bosch \
+		--tag ghcr.io/sikalabs/hello-world-server:bosch \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:bosch
+	docker push ghcr.io/sikalabs/hello-world-server:bosch
