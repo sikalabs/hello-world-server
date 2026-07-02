@@ -48,6 +48,7 @@ build-push-color-variants:
 	@make build-push-color-egd
 	@make build-push-color-adecco
 	@make build-push-color-bosch
+	@make build-push-color-alis
 
 build-push-color-variant:
 	docker build \
@@ -571,3 +572,14 @@ build-push-color-bosch:
 		- < Dockerfile
 	docker push sikalabs/hello-world-server:bosch
 	docker push ghcr.io/sikalabs/hello-world-server:bosch
+
+build-push-color-alis:
+	docker build \
+		--build-arg COLOR="#003366" \
+		--build-arg BACKGROUND_COLOR="#EDF6FF" \
+		--build-arg TEXT="Hello ALIS!" \
+		--tag sikalabs/hello-world-server:alis \
+		--tag ghcr.io/sikalabs/hello-world-server:alis \
+		- < Dockerfile
+	docker push sikalabs/hello-world-server:alis
+	docker push ghcr.io/sikalabs/hello-world-server:alis
