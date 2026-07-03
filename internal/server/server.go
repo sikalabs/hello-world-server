@@ -240,6 +240,7 @@ func setTextFromEnv() {
 }
 
 func Server() {
+	var err error
 	hostname, _ := os.Hostname()
 
 	setColorFromEnv()
@@ -272,10 +273,24 @@ func Server() {
 		portMetrics = envPortMetrics
 	}
 
+	slowStart := 0
+	envSlowStart := os.Getenv("SLOW_START")
+	if envSlowStart != "" {
+		slowStart, err = strconv.Atoi(envSlowStart)
+		if err != nil {
+			Logger.Fatal().Str("hostname", hostname).Msg(`cannot parse integer form SLOW_START value "` + envSlowStart + `", original Go error: ` + err.Error())
+		}
+	}
+
 	prometheus.MustRegister(promRequestsTotal)
 
 	Logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
 	RunTimestamp = time.Now()
+
+	for i := 0; i < slowStart; i++ {
+		Logger.Info().Str("hostname", hostname).Msgf("Starting in %d seconds ...", slowStart-i)
+		time.Sleep(1 * time.Second)
+	}
 
 	go mainServer(port, hostname)
 	go metricsServer(portMetrics, hostname)
